@@ -10,5 +10,5 @@ def run_game():
 	pygame.display.set_caption('Columns')
 	gl = Columns(settings,screen)
 	gl.rungame()
-run_game()
 
+run_game()

@@ -20,7 +20,7 @@ class Columns():
 		self.createFaller()
 		#adds USEREVENT for making the faller drop every second
 		self.dropTime = pygame.USEREVENT + 1
-		pygame.time.set_timer(self.dropTime, 1000)
+		pygame.time.set_timer(self.dropTime, 500)
 		#makes a dictionary of "roofs" that will keep track of when a faller should freeze
 		#keys should match x values, possible x values: 0, 50, 100, 150, 200, 250
 		#values are the y values ("roofs") of each x value
