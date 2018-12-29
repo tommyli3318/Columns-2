@@ -20,7 +20,8 @@ class Columns():
 		self.createFaller()
 		#adds USEREVENT for making the faller drop every second
 		self.dropTime = pygame.USEREVENT + 1
-		pygame.time.set_timer(self.dropTime, 500)
+		#TESTING
+		pygame.time.set_timer(self.dropTime, 300)
 		#makes a dictionary of "roofs" that will keep track of when a faller should freeze
 		#keys should match x values, possible x values: 0, 50, 100, 150, 200, 250
 		#values are the y values ("roofs") of each x value
@@ -70,6 +71,10 @@ class Columns():
 					#drop the faller every second
 					self.checkFreeze()
 					self.dropFaller()
+					self.checkMatching()
+					#TESTING
+					#print('-----------------self.blocks-------------------')
+					#print(self.blocks) 
 				elif event.type == pygame.KEYDOWN:
 					#moves the faller to the left, checks conditions to see if it is allowed to move left
 					if event.key == pygame.K_LEFT and self.faller[0][1] > 0 and self.checkLeft():
@@ -88,11 +93,14 @@ class Columns():
 	def createFaller(self):
 		'''creates a faller, stores color, x, and y in a 2D list. Two blocks, but never all three, can be the same color.'''
 		#grabs two unique numbers from 0 to 9, puts them into a list
-		index = random.sample(range(0, 9), 2)
+		#TESTING
+		#index = random.sample(range(0, 9), 2)
+		index = random.sample(range(0, 4), 2)
 		#this implementation ensures that the faller will not have 3 blocks of the same color
 		color1 = self.settings.colors[index[0]]
 		color2 = self.settings.colors[index[1]]
-		color3 = random.choice(self.settings.colors)
+		#TESTING
+		color3 = random.choice(self.settings.colors[0:4])
 		#randomizes the x position where the faller appears
 		x1 = random.choice([0,50,100,150,200,250])
 		x2 = x1
@@ -126,7 +134,7 @@ class Columns():
 		self.screen.fill(self.settings.bgColor)
 		#draw (window,color, (x,y, width, height))
 		#draws frozen blocks
-		if len(self.blocks) > 1:
+		if len(self.blocks) > 0:
 			for bl in self.blocks:
 				pygame.draw.rect(self.screen, bl[0], (bl[1], bl[2], self.settings.width, self.settings.height))
 		#draws blocks in the faller
@@ -134,6 +142,42 @@ class Columns():
 			pygame.draw.rect(self.screen, block[0], (block[1], block[2], self.settings.width, self.settings.height))
 		pygame.display.flip()
 		pygame.display.update()
+
+	def checkMatching(self):
+		'''checks for matching color blocks (3 in a row vertically, horizontally, or diagonally), and removes them'''
+		# should check self.blocks, remove blocks, drop blocks, update roofs
+		if len(self.blocks) >= 3:
+			for bl in self.blocks:
+				# [color, x, y+50]
+				#check for vertical matching
+				if [bl[0], bl[1], bl[2]+50] in self.blocks and [bl[0], bl[1], bl[2]+100] in self.blocks:
+					#removes blocks
+					self.blocks.remove([bl[0],bl[1],bl[2]])
+					self.blocks.remove([bl[0], bl[1], bl[2]+50])
+					self.blocks.remove([bl[0], bl[1], bl[2]+100])
+					#update roof dictionary
+					self.roof[str(bl[1])] += 150
+					#passes the x value
+					self.dropBlocks()
+
+				#checks for horizontal matching
+				if [bl[0], bl[1]+50, bl[2]] in self.blocks and [bl[0], bl[1]+100, bl[2]] in self.blocks:
+					self.blocks.remove([bl[0],bl[1],bl[2]])
+					self.blocks.remove([bl[0], bl[1]+50, bl[2]])
+					self.blocks.remove([bl[0], bl[1]+100, bl[2]])
+					#update roof dictionary
+					self.roof[str(bl[1])] += 50
+					self.roof[str(bl[1]+50)] += 50
+					self.roof[str(bl[1]+100)] += 50
+					self.dropBlocks()
+
+	def dropBlocks(self):
+		'''drops blocks after blocks are matched and removed'''
+		#grab the tallest block of each column, compare against roof, use that difference to update self.blocks
+		for bl in self.blocks:
+			# check for continuous y's, if +100 or +200 exists but not +50, need to drop blocks
+			#if bl[2] > self.roof[str(bl[1])]:
+			pass
 
 	def checkGameOver(self):
 		'''exits the game if one column fills up'''
