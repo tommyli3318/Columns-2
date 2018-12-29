@@ -72,6 +72,7 @@ class Columns():
 					self.checkFreeze()
 					self.dropFaller()
 					self.checkMatching()
+					self.dropBlocks()
 					#TESTING
 					#print('-----------------self.blocks-------------------')
 					#print(self.blocks) 
@@ -158,7 +159,6 @@ class Columns():
 					#update roof dictionary
 					self.roof[str(bl[1])] += 150
 					#passes the x value
-					self.dropBlocks()
 
 				#checks for horizontal matching
 				if [bl[0], bl[1]+50, bl[2]] in self.blocks and [bl[0], bl[1]+100, bl[2]] in self.blocks:
@@ -169,15 +169,47 @@ class Columns():
 					self.roof[str(bl[1])] += 50
 					self.roof[str(bl[1]+50)] += 50
 					self.roof[str(bl[1]+100)] += 50
-					self.dropBlocks()
 
 	def dropBlocks(self):
 		'''drops blocks after blocks are matched and removed'''
 		#grab the tallest block of each column, compare against roof, use that difference to update self.blocks
-		for bl in self.blocks:
-			# check for continuous y's, if +100 or +200 exists but not +50, need to drop blocks
-			#if bl[2] > self.roof[str(bl[1])]:
-			pass
+		for x in range(0,251,50):
+			#makes a list of a single column of blocks
+			column = []
+			for bl in self.blocks:
+				if bl[1] == x:
+					column.append(bl)
+
+			#makes a list of the y values for each block in column
+			yList = []
+			for blo in column:
+				# check for continuous y's, if +100 or +200 exists but not +50, need to drop blocks
+				yList.append(blo[2])
+				yList.sort()
+				#yList is a sorted list of y values for a column
+			
+			#defaults
+			ydiff = 0
+			y = 550
+
+			if len(yList)>0 and yList[-1] != 550:
+				y = yList[-1]
+
+			for i in range(1, len(yList)):
+				if yList[i] - yList[i-1] != 50:
+					ydiff = yList[i] - yList[i-1]
+					y = yList[i-1]
+			#ydiff is the value of "empty space" between blocks
+			#y is where the empty space first occurs
+			if ydiff == 0 and y == 550:
+				continue
+
+			for yinc in range(0,ydiff+1, 50):
+				for block in self.blocks:
+					if block[1] == x and block[2] == y-yinc:
+						block[2] += 50
+						break
+
 
 	def checkGameOver(self):
 		'''exits the game if one column fills up'''
