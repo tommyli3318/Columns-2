@@ -27,6 +27,7 @@ class Columns():
 		#values are the y values ("roofs") of each x value
 		self.bottom = self.settings.screen_height - 50
 		self.roof = {"0": self.bottom, "50": self.bottom, "100": self.bottom, "150": self.bottom, "200": self.bottom, "250": self.bottom}
+		self.score = 0
 
 	def rungame(self):
 		'''main loop of the game'''
@@ -153,22 +154,24 @@ class Columns():
 				#check for vertical matching
 				if [bl[0], bl[1], bl[2]+50] in self.blocks and [bl[0], bl[1], bl[2]+100] in self.blocks:
 					#removes blocks
-					self.blocks.remove([bl[0],bl[1],bl[2]])
+					self.blocks.remove([bl[0], bl[1], bl[2]])
 					self.blocks.remove([bl[0], bl[1], bl[2]+50])
 					self.blocks.remove([bl[0], bl[1], bl[2]+100])
 					#update roof dictionary
 					self.roof[str(bl[1])] += 150
 					#passes the x value
+					self.score += 1
 
 				#checks for horizontal matching
 				if [bl[0], bl[1]+50, bl[2]] in self.blocks and [bl[0], bl[1]+100, bl[2]] in self.blocks:
-					self.blocks.remove([bl[0],bl[1],bl[2]])
+					self.blocks.remove([bl[0], bl[1], bl[2]])
 					self.blocks.remove([bl[0], bl[1]+50, bl[2]])
 					self.blocks.remove([bl[0], bl[1]+100, bl[2]])
 					#update roof dictionary
 					self.roof[str(bl[1])] += 50
 					self.roof[str(bl[1]+50)] += 50
 					self.roof[str(bl[1]+100)] += 50
+					self.score += 1
 
 	def dropBlocks(self):
 		'''drops blocks after blocks are matched and removed'''
@@ -188,31 +191,34 @@ class Columns():
 				yList.sort()
 				#yList is a sorted list of y values for a column
 			
-			#defaults
-			ydiff = 0
-			y = 550
+			y = 0
+			if len(yList)>0:
+				if yList[-1] != 550:
+					#there is empty space on the bottom row
+					y = yList[-1]
+				else:
+					for i in range(1, len(yList)):
+						if yList[i] - yList[i-1] != 50:
+							#there is empty space
+							y = yList[i-1] 
+							break
+				#y == 0 means no empty space
+				if y == 0:
+					continue
+				ydiff = y - yList[0]
+				#y is the topmost value of the empty space
+				#ydiff is the value between y and the topmost block
 
-			if len(yList)>0 and yList[-1] != 550:
-				y = yList[-1]
-
-			for i in range(1, len(yList)):
-				if yList[i] - yList[i-1] != 50:
-					ydiff = yList[i] - yList[i-1]
-					y = yList[i-1]
-			#ydiff is the value of "empty space" between blocks
-			#y is where the empty space first occurs
-			if ydiff == 0 and y == 550:
-				continue
-
-			for yinc in range(0,ydiff+1, 50):
-				for block in self.blocks:
-					if block[1] == x and block[2] == y-yinc:
-						block[2] += 50
-						break
-
+				#drops blocks
+				for yinc in range(0,ydiff+1, 50):
+					for block in self.blocks:
+						if block[1] == x and block[2] == y-yinc:
+							block[2] += 50
+							break
 
 	def checkGameOver(self):
 		'''exits the game if one column fills up'''
 		min_value = min(self.roof.values())
 		if min_value < 0:
 			self.run = False
+			print("Game Over! Your score: " + str(self.score))
