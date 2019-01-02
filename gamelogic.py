@@ -74,9 +74,7 @@ class Columns():
 					self.dropFaller()
 					self.checkMatching()
 					self.dropBlocks()
-					#TESTING
-					#print('-----------------self.blocks-------------------')
-					#print(self.blocks) 
+ 
 				elif event.type == pygame.KEYDOWN:
 					#moves the faller to the left, checks conditions to see if it is allowed to move left
 					if event.key == pygame.K_LEFT and self.faller[0][1] > 0 and self.checkLeft():
@@ -97,12 +95,12 @@ class Columns():
 		#grabs two unique numbers from 0 to 9, puts them into a list
 		#TESTING
 		#index = random.sample(range(0, 9), 2)
-		index = random.sample(range(0, 4), 2)
+		index = random.sample(range(0, 2), 2)
 		#this implementation ensures that the faller will not have 3 blocks of the same color
 		color1 = self.settings.colors[index[0]]
 		color2 = self.settings.colors[index[1]]
 		#TESTING
-		color3 = random.choice(self.settings.colors[0:4])
+		color3 = random.choice(self.settings.colors[0:2])
 		#randomizes the x position where the faller appears
 		x1 = random.choice([0,50,100,150,200,250])
 		x2 = x1
@@ -148,30 +146,40 @@ class Columns():
 	def checkMatching(self):
 		'''checks for matching color blocks (3 in a row vertically, horizontally, or diagonally), and removes them'''
 		# should check self.blocks, remove blocks, drop blocks, update roofs
+		# idea: make a removeList and remove everything at the end
 		if len(self.blocks) >= 3:
+			removeList = []
 			for bl in self.blocks:
-				# [color, x, y+50]
 				#check for vertical matching
 				if [bl[0], bl[1], bl[2]+50] in self.blocks and [bl[0], bl[1], bl[2]+100] in self.blocks:
-					#removes blocks
-					self.blocks.remove([bl[0], bl[1], bl[2]])
-					self.blocks.remove([bl[0], bl[1], bl[2]+50])
-					self.blocks.remove([bl[0], bl[1], bl[2]+100])
-					#update roof dictionary
-					self.roof[str(bl[1])] += 150
-					#passes the x value
-					self.score += 1
+					#add the blocks to removeList
+					removeList.append([bl[0], bl[1], bl[2]])
+					removeList.append([bl[0], bl[1], bl[2]+50])
+					removeList.append([bl[0], bl[1], bl[2]+100])
 
 				#checks for horizontal matching
 				if [bl[0], bl[1]+50, bl[2]] in self.blocks and [bl[0], bl[1]+100, bl[2]] in self.blocks:
-					self.blocks.remove([bl[0], bl[1], bl[2]])
-					self.blocks.remove([bl[0], bl[1]+50, bl[2]])
-					self.blocks.remove([bl[0], bl[1]+100, bl[2]])
-					#update roof dictionary
-					self.roof[str(bl[1])] += 50
-					self.roof[str(bl[1]+50)] += 50
-					self.roof[str(bl[1]+100)] += 50
-					self.score += 1
+					#add the blocks to removeList
+					removeList.append([bl[0], bl[1], bl[2]])
+					removeList.append([bl[0], bl[1]+50, bl[2]])
+					removeList.append([bl[0], bl[1]+100, bl[2]])
+
+			# takes out duplicates from removeList to create uniqueRemoveList
+			uniqueRemoveList = []
+			for bl in removeList:
+				if bl not in uniqueRemoveList:
+					uniqueRemoveList.append(bl)
+
+			# updates score accordingly, player gains more points for removing more blocks at once
+			score_multiplier = len(uniqueRemoveList) - 2
+			if score_multiplier > 0:
+				self.score += 10 * score_multiplier
+				print('Match! +' + str(10 * score_multiplier), ' Your Score: ' + str(self.score))
+
+			# removes the blocks and update roof dictionary
+			for block in uniqueRemoveList:
+				self.roof[str(block[1])] += 50
+				self.blocks.remove(block)
 
 	def dropBlocks(self):
 		'''drops blocks after blocks are matched and removed'''
@@ -191,7 +199,7 @@ class Columns():
 				yList.sort()
 				#yList is a sorted list of y values for a column
 			
-			y = 0
+			y = -1
 			if len(yList)>0:
 				if yList[-1] != 550:
 					#there is empty space on the bottom row
@@ -202,8 +210,8 @@ class Columns():
 							#there is empty space
 							y = yList[i-1] 
 							break
-				#y == 0 means no empty space
-				if y == 0:
+				#y == -1 means no empty space
+				if y == -1:
 					continue
 				ydiff = y - yList[0]
 				#y is the topmost value of the empty space
@@ -219,6 +227,6 @@ class Columns():
 	def checkGameOver(self):
 		'''exits the game if one column fills up'''
 		min_value = min(self.roof.values())
-		if min_value < 0:
+		if min_value <= 0:
 			self.run = False
-			print("Game Over! Your score: " + str(self.score))
+			print("Game Over! Your final score: " + str(self.score))
