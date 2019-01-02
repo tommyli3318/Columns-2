@@ -9,3 +9,7 @@ Gameplay:
 Match 3 or more blocks of the same color to make them dissapear
 Matching more blocks at the same time will reward more points
 If any column fills up to the top, you lose
+
+Changelog:
+-implemented matching
+-bug fixes

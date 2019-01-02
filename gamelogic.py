@@ -226,7 +226,7 @@ class Columns():
 
 	def checkGameOver(self):
 		'''exits the game if one column fills up'''
-		min_value = min(self.roof.values())
+		min_value = min(self.roof.values()) + 50
 		if min_value <= 0:
 			self.run = False
 			print("Game Over! Your final score: " + str(self.score))
