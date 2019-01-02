@@ -164,6 +164,16 @@ class Columns():
 					removeList.append([bl[0], bl[1]+50, bl[2]])
 					removeList.append([bl[0], bl[1]+100, bl[2]])
 
+				#check for diagonal matching
+				if [bl[0], bl[1]+50, bl[2]+50] in self.blocks and [bl[0], bl[1]+100, bl[2]+100] in self.blocks:
+					removeList.append([bl[0], bl[1], bl[2]])
+					removeList.append([bl[0], bl[1]+50, bl[2]+50])
+					removeList.append([bl[0], bl[1]+100, bl[2]+100])
+				if [bl[0], bl[1]+50, bl[2]-50] in self.blocks and [bl[0], bl[1]+100, bl[2]-100] in self.blocks:
+					removeList.append([bl[0], bl[1], bl[2]])
+					removeList.append([bl[0], bl[1]+50, bl[2]-50])
+					removeList.append([bl[0], bl[1]+100, bl[2]-100])
+					
 			# takes out duplicates from removeList to create uniqueRemoveList
 			uniqueRemoveList = []
 			for bl in removeList:
