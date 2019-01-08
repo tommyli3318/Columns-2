@@ -14,6 +14,7 @@ class Columns():
 		self.run = True
 		self.settings = settings
 		self.screen = screen
+		self.timer = 500
 		#important info for blocks: x pos, y pos, color
 		self.blocks = []
 		#creates the first faller
@@ -21,7 +22,7 @@ class Columns():
 		#adds USEREVENT for making the faller drop every second
 		self.dropTime = pygame.USEREVENT + 1
 		#TESTING
-		pygame.time.set_timer(self.dropTime, 300)
+		pygame.time.set_timer(self.dropTime, self.timer)
 		#makes a dictionary of "roofs" that will keep track of when a faller should freeze
 		#keys should match x values, possible x values: 0, 50, 100, 150, 200, 250
 		#values are the y values ("roofs") of each x value
@@ -74,7 +75,6 @@ class Columns():
 					self.dropFaller()
 					self.checkMatching()
 					self.dropBlocks()
- 
 				elif event.type == pygame.KEYDOWN:
 					#moves the faller to the left, checks conditions to see if it is allowed to move left
 					if event.key == pygame.K_LEFT and self.faller[0][1] > 0 and self.checkLeft():
@@ -173,23 +173,27 @@ class Columns():
 					removeList.append([bl[0], bl[1], bl[2]])
 					removeList.append([bl[0], bl[1]+50, bl[2]-50])
 					removeList.append([bl[0], bl[1]+100, bl[2]-100])
-					
-			# takes out duplicates from removeList to create uniqueRemoveList
-			uniqueRemoveList = []
-			for bl in removeList:
-				if bl not in uniqueRemoveList:
-					uniqueRemoveList.append(bl)
 
-			# updates score accordingly, player gains more points for removing more blocks at once
-			score_multiplier = len(uniqueRemoveList) - 2
-			if score_multiplier > 0:
-				self.score += 10 * score_multiplier
-				print('Match! +' + str(10 * score_multiplier), ' Your Score: ' + str(self.score))
-
-			# removes the blocks and update roof dictionary
-			for block in uniqueRemoveList:
-				self.roof[str(block[1])] += 50
-				self.blocks.remove(block)
+			#if there's something to remove
+			if len(removeList) > 0:
+				# takes out duplicates from removeList to create uniqueRemoveList
+				uniqueRemoveList = []
+				for bl in removeList:
+					if bl not in uniqueRemoveList:
+						uniqueRemoveList.append(bl)
+				# updates score accordingly, player gains more points for removing more blocks at once
+				score_multiplier = len(uniqueRemoveList) - 2
+				if score_multiplier > 0:
+					self.score += 10 * score_multiplier
+					print('Match! +' + str(10 * score_multiplier), ' Your Score: ' + str(self.score))
+				# removes the blocks and update roof dictionary
+				for block in uniqueRemoveList:
+					self.roof[str(block[1])] += 50
+					self.blocks.remove(block)
+					#increases the drop speed
+					if self.timer > 100:
+						self.timer = int(self.timer*.99) + 1
+						pygame.time.set_timer(self.dropTime, self.timer)
 
 	def dropBlocks(self):
 		'''drops blocks after blocks are matched and removed'''
