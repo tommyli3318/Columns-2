@@ -6,6 +6,8 @@ class Settings():
 		self.width = 50
 		self.height = 50
 		self.bgColor = (0,0,0)
+		self.timer = 500
+		self.blocksize = 50
 
 		#makes a list of 10 different colors
 		gray = (128,128,128)
