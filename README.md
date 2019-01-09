@@ -11,8 +11,7 @@ Matching more blocks at the same time will reward more points
 If any column fills up to the top, you lose
 
 Changelog:
--implemented matching
--bug fixes
--scoring system added
--added grid
--optimization
+v1.0 implemented matching
+v1.1 bug fixes
+v1.2 scoring system added
+v1.3 added grid, code optimized
