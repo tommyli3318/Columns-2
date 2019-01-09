@@ -4,6 +4,7 @@ Pygame version of the video game Columns, with my own twist added
 
 Controls:
 Left/Right arrows to move the falling block
+
 Space to rotate the colors of the falling block
 
 
