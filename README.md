@@ -14,3 +14,5 @@ Changelog:
 -implemented matching
 -bug fixes
 -scoring system added
+-added grid
+-optimization
