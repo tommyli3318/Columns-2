@@ -9,6 +9,6 @@ def run_game():
 	screen = pygame.display.set_mode((settings.screen_width, settings.screen_height))
 	pygame.display.set_caption('Columns')
 	gl = Columns(settings,screen)
-	gl.rungame()
+	gl.runGame()
 
 run_game()

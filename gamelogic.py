@@ -22,7 +22,7 @@ class Columns():
 		self.roof = {0: self.bottom, 50: self.bottom, 100: self.bottom, 150: self.bottom, 200: self.bottom, 250: self.bottom}
 		self.score = 0
 
-	def rungame(self):
+	def runGame(self):
 		'''main loop of the game'''
 		while self.run:
 			#gameloop goes here
@@ -85,13 +85,12 @@ class Columns():
 	def createFaller(self):
 		'''creates a faller, stores color, x, and y in a 2D list. Two blocks, but never all three, can be the same color.'''
 		#grabs two unique numbers from 0 to 9, puts them into a list
-		#TESTING
-		#index = random.sample(range(0, 9), 2)
+		#TESTING; change to index = random.sample(range(0, 9), 2) for more colors
 		index = random.sample(range(0, 4), 2)
 		#this implementation ensures that the faller will not have 3 blocks of the same color
 		color1 = self.settings.colors[index[0]]
 		color2 = self.settings.colors[index[1]]
-		#TESTING
+		#TESTING; change to [0:9] for all the colors
 		color3 = random.choice(self.settings.colors[0:4])
 		#randomizes the x position where the faller appears
 		x1 = random.choice([0,50,100,150,200,250])
@@ -135,7 +134,7 @@ class Columns():
 
 		#draw grid
 		#line(Surface, color, start_pos, end_pos, width=1)
-		ys = (1,2,3,4,5,6,7,8,9,10,11)
+		ys = (i for i in range(1,12))
 		for mul in ys:
 			y = mul*self.bs
 			pygame.draw.line(self.screen, self.settings.bgColor, (0,y), (self.settings.screen_width,y))
@@ -233,7 +232,6 @@ class Columns():
 				ydiff = y - yList[0]
 				#y is the topmost value of the empty space
 				#ydiff is the value between y and the topmost block
-
 				#drops blocks
 				for yinc in range(0, ydiff+1, self.bs):
 					for block in self.blocks:
@@ -247,3 +245,4 @@ class Columns():
 		if min_value <= 0:
 			self.run = False
 			print("Game Over! Your final score: " + str(self.score))
+
