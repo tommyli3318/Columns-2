@@ -42,7 +42,7 @@ while True:
 		settings.gm = 1.5
 	else:
 		settings.ic = 7
-		settings.gm = 5
+		settings.gm = 4
 
 	new_score = run_game()
 	# keep track of high score
