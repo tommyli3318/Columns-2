@@ -29,6 +29,8 @@ class Columns():
 			self.checkEvent()
 			self.updateScreen()
 			self.checkGameOver()
+		pygame.quit()
+		return(self.score)
 		
 	def checkLeft(self) -> bool:
 		'''checks if the faller can move to the left by comparing its Y value and value of the roof to the left'''
@@ -95,12 +97,12 @@ class Columns():
 		'''creates a faller, stores color, x, and y in a 2D list. Two blocks, but never all three, can be the same color.'''
 		#grabs two unique numbers from 0 to 9, puts them into a list
 		#TESTING; change to index = random.sample(range(0, 9), 2) for more colors
-		index = random.sample(range(0, 4), 2)
+		index = random.sample(range(0, self.settings.ic), 2)
 		#this implementation ensures that the faller will not have 3 blocks of the same color
 		color1 = self.settings.colors[index[0]]
 		color2 = self.settings.colors[index[1]]
 		#TESTING; change to [0:9] for all the colors
-		color3 = random.choice(self.settings.colors[0:4])
+		color3 = random.choice(self.settings.colors[0:self.settings.ic])
 		#randomizes the x position where the faller appears
 		x1 = random.choice([0,50,100,150,200,250])
 		x2 = x1

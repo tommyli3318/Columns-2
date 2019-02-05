@@ -19,6 +19,8 @@ Match 3 or more blocks of the same color horizontally, vertically, or diagonally
 
 Matching more blocks at the same time will reward more points
 
+With each match, the speed of the game increases
+
 If any column fills up to the top, you lose
 
 
