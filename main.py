@@ -20,7 +20,7 @@ Columns created by Jay Geertsen in 1989\nIf you enjoy this game, feel free to ch
 out my other projects @ github.com/tommyli3318\n")
 
 print("For each of the following prompts, type in your response and hit the ENTER key:\
-\nType 'quit' anytime to exit\n")
+\nType 'quit' anytime to exit")
 
 while True:
 	diff_i = input("\n\nChoose a difficulty (e[asy],n[ormal],h[ard],i[nsane]): ")
@@ -33,12 +33,16 @@ while True:
 		break
 	elif diff_i in ('e','easy'):
 		settings.ic = 3
+		settings.gm = 0.25
 	elif diff_i in ('n','normal'):
 		settings.ic = 4
+		settings.gm = 1
 	elif diff_i in ('h','hard'):
 		settings.ic = 5
+		settings.gm = 1.5
 	else:
 		settings.ic = 7
+		settings.gm = 5
 
 	new_score = run_game()
 	# keep track of high score

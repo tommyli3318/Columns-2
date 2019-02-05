@@ -197,8 +197,8 @@ class Columns():
 				# updates score accordingly, player gains more points for removing more blocks at once
 				score_multiplier = len(uniqueRemoveList) - 2
 				if score_multiplier > 0:
-					self.score += 10 * score_multiplier
-					print('Match! +' + str(10 * score_multiplier), ' Your Score: ' + str(self.score))
+					self.score += 10 * score_multiplier * self.settings.gm
+					print(f"Match! +{str(10 * score_multiplier * self.settings.gm)}, Your Score: {str(self.score)}")
 				# removes the blocks and update roof dictionary
 				for block in uniqueRemoveList:
 					self.roof[block[1]] += self.bs
@@ -255,5 +255,5 @@ class Columns():
 		min_value = min(self.roof.values()) + self.bs
 		if min_value <= 0:
 			self.run = False
-			print("Game Over! Your final score: " + str(self.score))
+			print(f"Game Over! Your final score: {str(self.score)}")
 

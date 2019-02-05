@@ -9,6 +9,7 @@ class Settings():
 		self.timer = 500
 		self.blocksize = 50
 		self.ic = 4
+		self.gm = 1
 
 		#makes a list of 10 different colors
 		gray = (128,128,128)
