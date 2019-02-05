@@ -1,12 +1,11 @@
 # Columns 2 (Read for instructions on starting the game)
 Pygame version of the classic video game Columns, with my own twist added
 
-
 ***IMPORTANT***
 
 TRYING TO RUN THE GAME BY JUST DOUBLE-CLICKING main.py MIGHT NOT WORK!
 
-First download the folder and unzip it (runs on Python 3 and pygame module)
+First download the folder and unzip it
 
 Launch the game in one of the following ways:
 
@@ -16,6 +15,9 @@ Launch the game in one of the following ways:
 	- In cmd/terminal enter: cd [Columns-2 directory file path]
 	- Then enter: python main.py
 
+***Note***
+
+The game runs on Python 3 and the pygame module, WHICH I DO NOT OWN! I have simply included it as part of the download for convenience
 
 **Controls:**
 
