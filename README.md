@@ -15,7 +15,7 @@ Launch the game in one of the following ways:
 	- In cmd/terminal enter: cd [Columns-2 directory file path]
 	- Then enter: python main.py
 
-***Note***
+**Note**
 
 The game runs on Python 3 and the pygame module, WHICH I DO NOT OWN! I have simply included it as part of the download for convenience
 
