@@ -7,8 +7,13 @@ def run_game():
 	pygame.init()
 	settings = Settings()
 	screen = pygame.display.set_mode((settings.screen_width, settings.screen_height))
-	pygame.display.set_caption('Columns')
+	pygame.display.set_caption('Columns 2')
 	gl = Columns(settings,screen)
 	gl.runGame()
 
+
+#while True:
+	#input("")
 run_game()
+
+#asdjasopdjwaoijd

@@ -1,5 +1,5 @@
-# Columns
-Pygame version of the video game Columns, with my own twist added
+# Columns 2
+Pygame version of the classic video game Columns, with my own twist added
 
 
 **Controls:**
@@ -12,6 +12,8 @@ Down Arrow to drop the falling block instantly
 
 
 **Gameplay:**
+
+Download the folder, unzip it, and run main.py to start the game (runs on Python 3 and pygame module)
 
 Match 3 or more blocks of the same color horizontally, vertically, or diagonally to make them dissapear
 
