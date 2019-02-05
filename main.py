@@ -3,7 +3,7 @@ from settings import Settings
 import pygame
 
 def run_game():
-	'''driver for the videogame Columns, closes the game if player loses'''
+	'''driver for the game'''
 	pygame.init()
 	settings = Settings()
 	screen = pygame.display.set_mode((settings.screen_width, settings.screen_height))

@@ -1,5 +1,5 @@
 class Settings():
-	"""settings for the videogame Columns"""
+	"""settings for the game"""
 	def __init__(self):
 		self.screen_width = 300
 		self.screen_height = 600

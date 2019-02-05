@@ -1,7 +1,7 @@
 import pygame, random
 
 class Columns():
-	'''game logic for the video game Columns'''
+	'''game logic for the game'''
 	def __init__(self, settings, screen):
 		'''assigns instance variables for the class'''
 		self.run = True
