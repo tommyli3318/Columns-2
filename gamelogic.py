@@ -53,6 +53,14 @@ class Columns():
 			#creates new faller
 			self.createFaller()
 
+	def drop(self):
+		#this ordering makes fallers freeze at the next "tick" of time after they have landed
+		#drop the faller every second
+		self.checkFreeze()
+		self.dropFaller()
+		self.checkMatching()
+		self.dropBlocks()
+
 	def checkEvent(self):
 		'''checks all events of the game'''
 		#short circuits so self.checkLeft() and self.checkRight() don't run into out of bound errors
@@ -61,12 +69,7 @@ class Columns():
 					# quit if the q key or exit button is pressed
 					self.run = False
 				elif event.type == self.dropTime:
-					#this ordering makes fallers freeze at the next "tick" of time after they have landed
-					#drop the faller every second
-					self.checkFreeze()
-					self.dropFaller()
-					self.checkMatching()
-					self.dropBlocks()
+					self.drop()
 				elif event.type == pygame.KEYDOWN:
 					#moves the faller to the left, checks conditions to see if it is allowed to move left
 					if event.key == pygame.K_LEFT and self.faller[0][1] > 0 and self.checkLeft():
@@ -78,9 +81,15 @@ class Columns():
 						for block in self.faller:
 							#faller[1] is the x value
 							block[1] += self.bs
+					elif event.key == pygame.K_DOWN:
+						# drop until it reachesdown
+						temp = self.blocks[:]
+						while self.blocks == temp:
+							self.drop()
 					#rotates faller
 					elif event.key == pygame.K_SPACE:
 						self.rotateFaller()
+
 
 	def createFaller(self):
 		'''creates a faller, stores color, x, and y in a 2D list. Two blocks, but never all three, can be the same color.'''

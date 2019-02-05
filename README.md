@@ -8,6 +8,8 @@ Left/Right arrows to move the falling block
 
 Space to rotate the colors of the falling block
 
+Down Arrow to drop the falling block instantly
+
 
 **Gameplay:**
 
@@ -27,3 +29,5 @@ v1.1 bug fixes
 v1.2 scoring system added
 
 v1.3 added grid, code optimized
+
+v1.4 added instant drop
