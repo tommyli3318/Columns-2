@@ -257,3 +257,18 @@ class Columns():
 			self.run = False
 			print(f"Game Over! Your final score: {str(self.score)}")
 
+
+
+if __name__ == '__main__':
+	from settings import Settings
+	settings = Settings()
+
+	def run_game():
+		'''driver for the game'''
+		pygame.init()
+		screen = pygame.display.set_mode((settings.screen_width, settings.screen_height))
+		pygame.display.set_caption('Columns 2')
+		gl = Columns(settings,screen)
+		return gl.runGame()
+
+	run_game()
