@@ -3,9 +3,9 @@ Pygame version of the classic video game Columns, with my own twist added
 
 ***IMPORTANT***
 
-TRYING TO RUN THE GAME THROUGH JUST DOUBLE-CLICKING main.py MIGHT NOT WORK!
+TRYING TO RUN THE GAME BY JUST DOUBLE-CLICKING main.py MIGHT NOT WORK!
 
-Launch the game in one of the ways below:
+Launch the game in one of the following ways:
 
 1) run main.py using IDLE or another Python workspace
 
@@ -48,4 +48,4 @@ v1.3 added grid, code optimized
 
 v1.4 added instant drop
 
-v1.5 added replays
+v1.5 added user-interaction via command line
