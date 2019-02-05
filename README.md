@@ -1,4 +1,4 @@
-# Columns 2
+# Columns 2 (Read for instructions on starting the game)
 Pygame version of the classic video game Columns, with my own twist added
 
 ***IMPORTANT***
