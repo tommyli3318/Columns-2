@@ -19,6 +19,8 @@ Launch the game in one of the following ways:
 
 The game runs on Python 3 and the pygame module, WHICH I DO NOT OWN! I have simply included it as part of the download for convenience
 
+All credits of pygame go to pygame Community @ www.pygame.org
+
 **Controls:**
 
 Left/Right arrows to move the falling block
