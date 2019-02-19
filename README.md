@@ -55,3 +55,5 @@ v1.3 added grid, code optimized
 v1.4 added instant drop
 
 v1.5 added user-interaction via command line
+
+v1.6 menuscreen added, now saves high score

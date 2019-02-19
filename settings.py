@@ -25,6 +25,6 @@ class Settings():
 		self.colors = [gray,white,red,orange,yellow,green,blue,purple,pink,lightBlue]
 
 if __name__ == '__main__':
-	print('Run main.py to launch the game')
+	print("Please launch the game by running main.py")
 
 	

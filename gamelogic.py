@@ -20,7 +20,7 @@ class Columns():
 		#values are the y values ("roofs") of each x value
 		self.bottom = self.settings.screen_height - self.bs
 		self.roof = {0: self.bottom, 50: self.bottom, 100: self.bottom, 150: self.bottom, 200: self.bottom, 250: self.bottom}
-		self.score = 0
+		self.score = 0.0
 
 	def runGame(self):
 		'''main loop of the game'''
@@ -29,8 +29,12 @@ class Columns():
 			self.checkEvent()
 			self.updateScreen()
 			self.checkGameOver()
-		pygame.quit()
-		return(self.score)
+		return self.score
+
+	def displayScore(self, color=(255,255,255), f=20):
+		font = pygame.font.SysFont("Impact", f)
+		text_obj = font.render(f"Score: {self.score}", True, color)
+		self.screen.blit(text_obj, (5,5))
 		
 	def checkLeft(self) -> bool:
 		'''checks if the faller can move to the left by comparing its Y value and value of the roof to the left'''
@@ -67,8 +71,8 @@ class Columns():
 		'''checks all events of the game'''
 		#short circuits so self.checkLeft() and self.checkRight() don't run into out of bound errors
 		for event in pygame.event.get():
-				if event.type == pygame.QUIT or (event.type == pygame.KEYDOWN and event.key == pygame.K_q):
-					# quit if the q key or exit button is pressed
+				if event.type == pygame.QUIT:
+					# quit if the exit button is clicked
 					self.run = False
 				elif event.type == self.dropTime:
 					self.drop()
@@ -134,6 +138,7 @@ class Columns():
 	def updateScreen(self):
 		'''updates the screen'''
 		self.screen.fill(self.settings.bgColor)
+		self.displayScore()
 		#draw (window,color, (x,y, width, height))
 		#draws frozen blocks
 		if len(self.blocks) > 0:
@@ -189,6 +194,7 @@ class Columns():
 
 			#if there's something to remove
 			if len(removeList) > 0:
+				# match!
 				# takes out duplicates from removeList to create uniqueRemoveList
 				uniqueRemoveList = []
 				for bl in removeList:
@@ -198,7 +204,6 @@ class Columns():
 				score_multiplier = len(uniqueRemoveList) - 2
 				if score_multiplier > 0:
 					self.score += 10 * score_multiplier * self.settings.gm
-					print(f"Match! +{str(10 * score_multiplier * self.settings.gm)}, Your Score: {str(self.score)}")
 				# removes the blocks and update roof dictionary
 				for block in uniqueRemoveList:
 					self.roof[block[1]] += self.bs
@@ -260,6 +265,7 @@ class Columns():
 
 
 if __name__ == '__main__':
+	"""
 	from settings import Settings
 	settings = Settings()
 
@@ -272,3 +278,5 @@ if __name__ == '__main__':
 		return gl.runGame()
 
 	run_game()
+	"""
+	print("Please launch the game by running main.py")
