@@ -163,12 +163,13 @@ class Columns():
 		pygame.display.update()
 
 	def checkMatching(self):
-		'''checks for matching color blocks (3 in a row vertically, horizontally, or diagonally), and removes them'''
+		'''checks for matching color blocks (3 or more in a row vertically, horizontally, or diagonally), and removes them'''
 		# should check self.blocks, remove blocks, drop blocks, update roofs
 		if len(self.blocks) >= 3:
 			removeList = []
 			for bl in self.blocks:
 				#check for vertical matching
+				# self.faller = [[color1,x1,y1],[color2,x2,y2],[color3,x3,y3]]
 				if [bl[0], bl[1], bl[2]+self.bs] in self.blocks and [bl[0], bl[1], bl[2]+2*self.bs] in self.blocks:
 					#add the blocks to removeList
 					removeList.append([bl[0], bl[1], bl[2]])
@@ -265,18 +266,4 @@ class Columns():
 
 
 if __name__ == '__main__':
-	"""
-	from settings import Settings
-	settings = Settings()
-
-	def run_game():
-		'''driver for the game'''
-		pygame.init()
-		screen = pygame.display.set_mode((settings.screen_width, settings.screen_height))
-		pygame.display.set_caption('Columns 2')
-		gl = Columns(settings,screen)
-		return gl.runGame()
-
-	run_game()
-	"""
 	print("Please launch the game by running main.py")
