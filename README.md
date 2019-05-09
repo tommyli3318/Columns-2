@@ -17,7 +17,7 @@ Launch the game in one of the following ways:
 
 **Note**
 
-The game runs on Python 3 and the pygame module, WHICH I DO NOT OWN! I have simply included it as part of the download for convenience
+The game runs on Python 3 and the pygame package, WHICH I DO NOT OWN! I have simply included it as part of the download for convenience
 
 All credits of pygame go to pygame Community @ www.pygame.org
 
