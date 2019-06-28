@@ -1,5 +1,5 @@
 # Columns 2 (Read for instructions on starting the game)
-Pygame version of the classic video game Columns, with my own twist added
+Pygame version of the classic video game Columns, with my own twist added.
 
 ***IMPORTANT***
 
@@ -11,8 +11,8 @@ Launch the game in one of the following ways:
 
 1) run main.py using IDLE or another Python workspace
 
-2) run main.py with terminal/cmd: 
-	- In cmd/terminal enter: cd [Columns-2 directory file path]
+2) run main.py with terminal: 
+	- In terminal enter: cd [Columns-2 directory file path]
 	- Then enter: python main.py
 
 **Note**
