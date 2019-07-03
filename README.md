@@ -3,8 +3,6 @@ Pygame version of the classic video game Columns, with my own twist added.
 
 ***IMPORTANT***
 
-TRYING TO RUN THE GAME BY JUST DOUBLE-CLICKING main.py MIGHT NOT WORK!
-
 First download the folder and unzip it
 
 Launch the game in one of the following ways:
