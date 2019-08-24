@@ -11,7 +11,7 @@ class Settings():
 		self.ic = 4
 		self.gm = 1
 
-		#makes a list of 10 different colors
+		# makes a list of 10 different colors
 		gray = (128,128,128)
 		white = (224,224,224)
 		red = (255,102,102)
