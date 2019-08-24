@@ -1,23 +1,16 @@
-# Columns 2 (Read for instructions on starting the game) 
+# Columns 2
 Pygame version of the classic video game Columns, with my own twist added.
 
-***IMPORTANT***
 
-First download the folder and unzip it
+***Test it out!***
 
-Launch the game in one of the following ways:
+Enter the following commands in terminal:
+(Only do step 1 if package pygame is not installed)
+1. `python -m pip install -U pygame`
+2. `git clone https://github.com/tommyli3318/Columns-2.git --depth 1 --single-branch --no-tags`
+3. `cd Columns-2/`
+4. `python main.py`
 
-1) run main.py using IDLE or another Python workspace
-
-2) run main.py with terminal: 
-	- In terminal enter: cd [Columns-2 directory file path]
-	- Then enter: python main.py
-
-**Note**
-
-The game runs on Python 3 and the pygame package, WHICH I DO NOT OWN! I have simply included it as part of the download for convenience
-
-All credits of pygame go to pygame Community @ www.pygame.org
 
 **Controls:**
 
@@ -29,7 +22,6 @@ Down Arrow to drop the falling block instantly
 
 
 **Gameplay:**
-
 
 Match 3 or more blocks of the same color horizontally, vertically, or diagonally to make them dissapear
 
