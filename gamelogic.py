@@ -151,13 +151,11 @@ class Game():
 
 		# draw grid
 		# line(Surface, color, start_pos, end_pos, width=1)
-		ys = (i for i in range(1,12))
-		for mul in ys:
-			y = mul*self.bs
+		for i in range(1,12):
+			y = i*self.bs
 			pygame.draw.line(self.screen, self.settings.bgColor, (0,y), (self.settings.screen_width,y))
-		xs = (1,2,3,4,5)
-		for mul in xs:
-			x = mul*self.bs
+		for i in (1,2,3,4,5):
+			x = i*self.bs
 			pygame.draw.line(self.screen, self.settings.bgColor, (x,0), (x,self.settings.screen_height))
 
 		pygame.display.flip()
@@ -227,9 +225,9 @@ class Game():
 
 			# makes a list of the y values for each block in column
 			yList = []
-			for blo in column:
+			for bl in column:
 				# check for continuous y's, if +100 or +200 exists but not +50, need to drop blocks
-				yList.append(blo[2])
+				yList.append(bl[2])
 				yList.sort()
 				# yList is a sorted list of y values for a column
 			
@@ -262,9 +260,4 @@ class Game():
 		min_value = min(self.roof.values()) + self.bs
 		if min_value <= 0:
 			self.run = False
-			print(f"Game Over! Your final score: {str(self.score)}")
-
-
-
-if __name__ == '__main__':
-	print("Please launch the game by running main.py")
+			print("Game Over! Your final score: %s" % self.score)

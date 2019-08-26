@@ -23,8 +23,3 @@ class Settings():
 		pink = 	(255,204,255)
 		lightBlue = (204,255,255)
 		self.colors = [gray,white,red,orange,yellow,green,blue,purple,pink,lightBlue]
-
-if __name__ == '__main__':
-	print("Please launch the game by running main.py")
-
-	
